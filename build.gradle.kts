@@ -28,6 +28,17 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "16"
 }
 
+tasks.withType<Jar>() {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes["Main-Class"] = "NotrufzentraleKt"
+    }
+    configurations["compileClasspath"].forEach { file: File ->
+        from(zipTree(file.absoluteFile))
+    }
+}
+
 application {
-    mainClass.set("MainKt")
+    mainClass.set("NotrufzentraleKt")
 }
