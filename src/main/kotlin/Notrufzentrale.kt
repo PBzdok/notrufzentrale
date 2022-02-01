@@ -1,8 +1,10 @@
+import commands.Command
+import commands.HelpCommand
+import commands.MusselCommand
+import commands.RollCommand
 import dev.kord.core.Kord
-import dev.kord.core.entity.ReactionEmoji
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
-import kotlinx.coroutines.delay
 
 suspend fun main(args: Array<String>) {
     if (args.size != 1) {
@@ -10,18 +12,25 @@ suspend fun main(args: Array<String>) {
     }
 
     val client = Kord(args[0])
-    val pingPong = ReactionEmoji.Unicode("\uD83C\uDFD3")
+    val commands = buildCommands()
 
     client.on<MessageCreateEvent> {
-        if (message.content != "!ping") return@on
+        if (message.author?.isBot != false) return@on
 
-        val response = message.channel.createMessage("Pong!")
-        response.addReaction(pingPong)
+        val commandInput = message.content.split(" ")[0]
 
-        delay(5000)
-        message.delete()
-        response.delete()
+        commands
+            .find { (it.prefix + it.name) == commandInput }
+            ?.execute(this)
     }
 
     client.login()
+}
+
+fun buildCommands(): List<Command> {
+    return listOf(
+        HelpCommand,
+        MusselCommand,
+        RollCommand
+    )
 }
