@@ -1,5 +1,6 @@
 package commands.dice
 
-sealed class DiceError(message: String) : Exception(message)
-class ParseError(message: String) : DiceError(message)
-class SizeError(message: String) : DiceError(message)
+sealed class Error {
+    object Parse : Error()
+    object Size : Error()
+}

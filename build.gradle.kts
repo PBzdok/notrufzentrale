@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     implementation("dev.kord", "kord-core", "0.8.0-M8")
+    implementation("io.arrow-kt", "arrow-core", "1.0.1")
     testImplementation(kotlin("test"))
 
     runtimeOnly("org.slf4j", "slf4j-simple", "1.7.35")

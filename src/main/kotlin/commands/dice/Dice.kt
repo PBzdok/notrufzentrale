@@ -1,5 +1,6 @@
 package commands.dice
 
+import arrow.core.Either
 import kotlin.random.Random
 
 class Dice(private val n: Int, private val size: DiceSize) {
@@ -11,17 +12,16 @@ class Dice(private val n: Int, private val size: DiceSize) {
     companion object {
         private val regex = Regex("^([1-9]\\d*)d(\\d+)\$")
 
-        fun fromString(input: String): Result<Dice> {
+        fun fromString(input: String): Either<Error, Dice> {
             val capture = regex.matchEntire(input)?.groupValues
+                ?: return Either.Left(Error.Parse)
 
-            return if (capture == null) Result.failure(ParseError("Unable to parse, must be of the form <number>d<size>"))
-            else {
-                val n = capture[1].toInt()
-                val size = capture[2].toInt()
-                val diceSize = DiceSize.values().find { it.value == size }
-                if (diceSize == null) Result.failure(SizeError("Dice size must be 4, 6, 8, 10, 12, 20, or 100"))
-                else Result.success(Dice(n, diceSize))
-            }
+            val n = capture[1].toInt()
+            val size = capture[2].toInt()
+            val diceSize = DiceSize.values().find { it.value == size }
+                ?: return Either.Left(Error.Size)
+
+            return Either.Right(Dice(n, diceSize))
         }
     }
 }
