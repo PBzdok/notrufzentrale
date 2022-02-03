@@ -5,9 +5,7 @@ import kotlin.random.Random
 
 class Dice(private val n: Int, private val size: DiceSize) {
 
-    fun roll(): Array<Int> {
-        return Array(n) { Random.nextInt(1, size.value + 1) }
-    }
+    fun roll(): Array<Int> = Array(n) { Random.nextInt(1, size.value + 1) }
 
     companion object {
         private val regex = Regex("^([1-9]\\d*)d(\\d+)\$")

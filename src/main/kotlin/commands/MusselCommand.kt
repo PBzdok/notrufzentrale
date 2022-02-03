@@ -19,7 +19,7 @@ object MusselCommand : Command() {
         "Better not tell you now",
         "Concentrate and ask again",
         "Don't count on it",
-        " It is certain",
+        "It is certain",
         "My sources say no",
         "Outlook good",
         "You may rely on it",
