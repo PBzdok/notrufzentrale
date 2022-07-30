@@ -1,24 +1,31 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.7.10"
     application
 }
 
 group = "de.pbz"
 version = "1.0"
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("dev.kord", "kord-core", "0.8.0-M8")
-    implementation("io.arrow-kt", "arrow-core", "1.0.1")
+    implementation("dev.kord:kord-core:0.8.0-M15")
+    implementation("io.arrow-kt:arrow-core:1.1.2")
+
     testImplementation(kotlin("test"))
 
-    runtimeOnly("org.slf4j", "slf4j-simple", "1.7.35")
-    runtimeOnly("org.slf4j", "slf4j-api", "1.7.35")
+    runtimeOnly("org.slf4j:slf4j-simple:1.7.36")
+    runtimeOnly("org.slf4j:slf4j-api:1.7.36")
 }
 
 tasks.test {
@@ -26,7 +33,7 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "16"
+    kotlinOptions.jvmTarget = "17"
 }
 
 tasks.withType<Jar>() {
@@ -35,9 +42,10 @@ tasks.withType<Jar>() {
     manifest {
         attributes["Main-Class"] = "NotrufzentraleKt"
     }
-    configurations["compileClasspath"].forEach { file: File ->
-        from(zipTree(file.absoluteFile))
-    }
+    configurations["compileClasspath"]
+        .forEach { file: File ->
+            from(zipTree(file.absoluteFile))
+        }
 }
 
 application {
