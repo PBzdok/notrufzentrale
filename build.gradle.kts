@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.7.20"
     application
 }
 
@@ -19,13 +19,13 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.kord:kord-core:0.8.0-M8")
-    implementation("io.arrow-kt:arrow-core:1.1.2")
+    implementation("dev.kord:kord-core:0.8.0-M16")
+    implementation("io.arrow-kt:arrow-core:1.1.4-alpha.10")
 
     testImplementation(kotlin("test"))
 
-    runtimeOnly("org.slf4j:slf4j-simple:1.7.36")
-    runtimeOnly("org.slf4j:slf4j-api:1.7.36")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.3")
+    runtimeOnly("org.slf4j:slf4j-api:2.0.3")
 }
 
 tasks.test {
