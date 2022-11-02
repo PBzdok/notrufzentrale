@@ -5,16 +5,18 @@ import commands.RollCommand
 import dev.kord.core.Kord
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
+import dev.kord.gateway.Intent
+import dev.kord.gateway.PrivilegedIntent
 
 suspend fun main(args: Array<String>) {
     if (args.size != 1) {
         throw IllegalArgumentException("Please provide a API Token!")
     }
 
-    val client = Kord(args[0])
+    val kord = Kord(args[0])
     val commands = buildCommands()
 
-    client.on<MessageCreateEvent> {
+    kord.on<MessageCreateEvent> {
         if (message.author?.isBot != false) return@on
 
         val commandInput = message.content.split(" ")[0]
@@ -24,7 +26,10 @@ suspend fun main(args: Array<String>) {
             ?.execute(this)
     }
 
-    client.login()
+    kord.login {
+        @OptIn(PrivilegedIntent::class)
+        intents += Intent.MessageContent
+    }
 }
 
 fun buildCommands(): List<Command> {
