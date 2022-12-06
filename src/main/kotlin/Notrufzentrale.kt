@@ -2,6 +2,8 @@ import commands.Command
 import commands.HelpCommand
 import commands.MusselCommand
 import commands.RollCommand
+import commands.initiative.AddInitiativeCommand
+import commands.initiative.NewInitiativeCommand
 import dev.kord.core.Kord
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
@@ -36,6 +38,8 @@ fun buildCommands(): List<Command> {
     return listOf(
         HelpCommand,
         MusselCommand,
-        RollCommand
+        RollCommand,
+        NewInitiativeCommand,
+        AddInitiativeCommand
     )
 }
