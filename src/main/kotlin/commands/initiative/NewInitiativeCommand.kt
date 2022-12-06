@@ -13,12 +13,13 @@ object NewInitiativeCommand : Command() {
             .split(" ")
         val dq = ArrayDeque(users)
 
-        initiative = (1..10).toList()
-            .shuffled()
-            .associateWith { dq.removeFirstOrNull() ?: PLACEHOLDER }
-            .toMutableMap()
+        initiative = Initiative(
+            (1..10).toList()
+                .shuffled()
+                .associateWith { dq.removeFirstOrNull() ?: PLACEHOLDER }
+                .toMutableMap()
+        )
 
-        val message = State.initiativeToString()
-        event.message.channel.createMessage(message)
+        event.message.channel.createMessage(initiative.toString())
     }
 }

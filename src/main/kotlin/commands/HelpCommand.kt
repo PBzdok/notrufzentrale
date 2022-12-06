@@ -21,6 +21,17 @@ object HelpCommand : Command() {
                 value = "Würfel nach Standard Notation, z.B. `#roll 2d10`"
                 inline = false
             }
+            field {
+                name = "`${prefix}new_initiative <List of usernames>`"
+                value =
+                    "Ziehe die Initiative für alle übergebenen Nutzer, z.B. `#new_initiative schmai schmils smavy schmitzitz`"
+                inline = false
+            }
+            field {
+                name = "`${prefix}add_initiative <Username>`"
+                value = "Weise eine übrige initiative dem übergebenen Nutzer zu, z.B. `#add_initiative schmai"
+                inline = false
+            }
             footer {
                 text = "Find me @ https://github.com/pbzdok/notrufzentrale"
             }

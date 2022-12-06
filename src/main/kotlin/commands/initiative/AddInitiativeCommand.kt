@@ -8,10 +8,7 @@ object AddInitiativeCommand : Command() {
 
     override suspend fun execute(event: MessageCreateEvent) {
         val user = event.message.content.substringAfter(" ") //#add_initiative schmai
-
-        State.addUserInitiative(user)
-
-        val message = State.initiativeToString()
-        event.message.channel.createMessage(message)
+        State.initiative.addUserInitiative(user)
+        event.message.channel.createMessage(State.initiative.toString())
     }
 }

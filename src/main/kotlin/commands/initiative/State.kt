@@ -1,16 +1,26 @@
 package commands.initiative
 
 
-const val PLACEHOLDER = "🅱️"
+const val PLACEHOLDER = "✖️"
 
 object State {
-    var initiative = mutableMapOf<Int, String>()
+    var initiative = Initiative()
+}
 
+data class Initiative(
+    private val entries: MutableMap<Int, String> = mutableMapOf()
+) {
     fun addUserInitiative(username: String) {
-        val remainingEntries = initiative.filter { it.value == PLACEHOLDER }
-        val userInit = remainingEntries.keys.random()
-        initiative[userInit] = username
+        val userInit = entries
+            .filter { it.value == PLACEHOLDER }
+            .keys.random()
+        entries[userInit] = username
     }
 
-    fun initiativeToString(): String = initiative.toSortedMap() .map { "Initative `${it.key}` für `${it.value}`" }.joinToString("\n")
+    override fun toString(): String {
+        return entries
+            .toSortedMap()
+            .map { "Initative `${it.key}` für `${it.value}`" }
+            .joinToString("\n")
+    }
 }
