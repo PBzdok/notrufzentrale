@@ -29,7 +29,7 @@ object HelpCommand : Command() {
             }
             field {
                 name = "`${prefix}add_initiative <Username>`"
-                value = "Weise eine übrige initiative dem übergebenen Nutzer zu, z.B. `#add_initiative schmai"
+                value = "Weise eine übrige initiative dem übergebenen Nutzer zu, z.B. `#add_initiative schmai`"
                 inline = false
             }
             footer {
