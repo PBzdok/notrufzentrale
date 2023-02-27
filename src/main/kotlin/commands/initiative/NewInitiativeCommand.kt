@@ -1,7 +1,6 @@
 package commands.initiative
 
 import commands.Command
-import commands.initiative.State.initiative
 import dev.kord.core.event.message.MessageCreateEvent
 
 object NewInitiativeCommand : Command() {
@@ -13,13 +12,13 @@ object NewInitiativeCommand : Command() {
             .split(" ")
         val dq = ArrayDeque(users)
 
-        initiative = Initiative(
+        State.initiative = Initiative(
             (1..10).toList()
                 .shuffled()
                 .associateWith { dq.removeFirstOrNull() ?: PLACEHOLDER }
                 .toMutableMap()
         )
 
-        event.message.channel.createMessage(initiative.toString())
+        event.message.channel.createMessage(State.initiative.toString())
     }
 }

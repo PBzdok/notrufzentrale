@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.8.10"
     application
     idea
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.kord:kord-core:0.8.0-M16")
+    implementation("dev.kord:kord-core:0.8.0-M17")
     implementation("io.arrow-kt:arrow-core:1.1.4-alpha.10")
 
     testImplementation(kotlin("test"))

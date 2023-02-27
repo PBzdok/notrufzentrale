@@ -1,6 +1,8 @@
 package commands.dice
 
 import arrow.core.Either
+import arrow.core.Either.Left
+import arrow.core.Either.Right
 import kotlin.random.Random
 
 class Dice(private val n: Int, private val size: DiceSize) {
@@ -12,14 +14,14 @@ class Dice(private val n: Int, private val size: DiceSize) {
 
         fun fromString(input: String): Either<Error, Dice> {
             val capture = regex.matchEntire(input)?.groupValues
-                ?: return Either.Left(Error.Parse)
+                ?: return Left(Error.Parse)
 
             val n = capture[1].toInt()
             val size = capture[2].toInt()
             val diceSize = DiceSize.values().find { it.value == size }
-                ?: return Either.Left(Error.Size)
+                ?: return Left(Error.Size)
 
-            return Either.Right(Dice(n, diceSize))
+            return Right(Dice(n, diceSize))
         }
     }
 }

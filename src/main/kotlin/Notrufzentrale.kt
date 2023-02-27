@@ -34,12 +34,11 @@ suspend fun main(args: Array<String>) {
     }
 }
 
-fun buildCommands(): List<Command> {
-    return listOf(
+fun buildCommands(): List<Command> =
+    listOf(
         HelpCommand,
         MusselCommand,
         RollCommand,
         NewInitiativeCommand,
         AddInitiativeCommand
     )
-}
