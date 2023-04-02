@@ -9,6 +9,9 @@ import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
 import dev.kord.gateway.Intent
 import dev.kord.gateway.PrivilegedIntent
+import mu.KotlinLogging
+
+private val logger = KotlinLogging.logger {}
 
 suspend fun main(args: Array<String>) {
     if (args.size != 1) {
@@ -20,13 +23,12 @@ suspend fun main(args: Array<String>) {
 
     kord.on<MessageCreateEvent> {
         if (message.author?.isBot != false) return@on
-
         val commandInput = message.content.split(" ")[0]
-
-        commands
-            .find { (it.prefix + it.name) == commandInput }
-            ?.execute(this)
+        commands.find { (it.prefix + it.name) == commandInput }
+                ?.execute(this)
     }
+
+    logger.info { "Notrufzentrale checking in..." }
 
     kord.login {
         @OptIn(PrivilegedIntent::class)
@@ -35,10 +37,10 @@ suspend fun main(args: Array<String>) {
 }
 
 fun buildCommands(): List<Command> =
-    listOf(
-        HelpCommand,
-        MusselCommand,
-        RollCommand,
-        NewInitiativeCommand,
-        AddInitiativeCommand
-    )
+        listOf(
+                HelpCommand,
+                MusselCommand,
+                RollCommand,
+                NewInitiativeCommand,
+                AddInitiativeCommand
+        )

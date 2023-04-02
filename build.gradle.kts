@@ -15,13 +15,14 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.kord:kord-core:0.8.0-M17")
+    implementation("dev.kord:kord-core:0.8.2")
     implementation("io.arrow-kt:arrow-core:1.1.4-alpha.10")
 
     testImplementation(kotlin("test"))
 
-    runtimeOnly("org.slf4j:slf4j-simple:2.0.3")
-    runtimeOnly("org.slf4j:slf4j-api:2.0.3")
+//    runtimeOnly("org.slf4j:slf4j-simple:2.0.3")
+//    runtimeOnly("org.slf4j:slf4j-api:2.0.3")
+	runtimeOnly("io.github.microutils:kotlin-logging-jvm:2.0.11")
 }
 
 application {
