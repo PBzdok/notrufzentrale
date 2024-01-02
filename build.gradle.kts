@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "1.9.22"
     application
     idea
-    id("org.jetbrains.kotlinx.kover") version "0.6.1"
+    id("org.jetbrains.kotlinx.kover") version "0.7.5"
 }
 
 group = "de.pbz"
@@ -15,14 +15,12 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.kord:kord-core:0.8.2")
+    implementation("dev.kord:kord-core:0.12.0")
     implementation("io.arrow-kt:arrow-core:1.1.4-alpha.10")
 
     testImplementation(kotlin("test"))
 
-//    runtimeOnly("org.slf4j:slf4j-simple:2.0.3")
-//    runtimeOnly("org.slf4j:slf4j-api:2.0.3")
-	runtimeOnly("io.github.microutils:kotlin-logging-jvm:2.0.11")
+    runtimeOnly("io.github.microutils:kotlin-logging-jvm:2.0.11")
 }
 
 application {

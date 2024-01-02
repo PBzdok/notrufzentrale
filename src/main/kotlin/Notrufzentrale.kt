@@ -1,4 +1,3 @@
-import commands.Command
 import commands.HelpCommand
 import commands.MusselCommand
 import commands.RollCommand
@@ -13,19 +12,26 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
+private val commands = listOf(
+    HelpCommand,
+    MusselCommand,
+    RollCommand,
+    NewInitiativeCommand,
+    AddInitiativeCommand
+)
+
 suspend fun main(args: Array<String>) {
     if (args.size != 1) {
         throw IllegalArgumentException("Please provide a API Token!")
     }
 
     val kord = Kord(args[0])
-    val commands = buildCommands()
 
     kord.on<MessageCreateEvent> {
         if (message.author?.isBot != false) return@on
         val commandInput = message.content.split(" ")[0]
         commands.find { (it.prefix + it.name) == commandInput }
-                ?.execute(this)
+            ?.execute(this)
     }
 
     logger.info { "Notrufzentrale checking in..." }
@@ -34,13 +40,6 @@ suspend fun main(args: Array<String>) {
         @OptIn(PrivilegedIntent::class)
         intents += Intent.MessageContent
     }
-}
 
-fun buildCommands(): List<Command> =
-        listOf(
-                HelpCommand,
-                MusselCommand,
-                RollCommand,
-                NewInitiativeCommand,
-                AddInitiativeCommand
-        )
+    logger.info { "Notrufzentrale stopping..." }
+}
